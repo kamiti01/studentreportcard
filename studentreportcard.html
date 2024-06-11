@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Report Card</title>
+    <style>
+
+        body {
+          font-family: 'Times New Roman', Times, serif;
+          margin: 0;
+          text-align: left;
+          padding: 20px;
+        }
+    
+        h1 {
+          font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+          text-align: center;
+        }
+    
+        form {
+          display: flex;
+          flex-wrap: wrap;
+          width: 100%;
+          max-width: 400px;
+          margin: 20px auto;
+          padding: 20px;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+        }
+    
+        form label {
+          width: 100%;
+          margin-bottom: 5px;
+        }
+    
+        form input[type="text"] {
+          width: 100%;
+          padding: 8px;
+          margin-bottom: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        }
+    
+        form button {
+          width: 100%;
+          padding: 10px;
+          background-color: #4CAF50;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+    
+        @media only screen and (max-width: 768px) {
+          form {
+            padding: 10px;
+          }
+        }
+    
+        .report-card {
+          max-width: 400px;
+          text-align: center;
+          margin: 20px auto;
+          padding: 20px;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          display: table;
+        }
+        .report-card table {
+      width: 100%;
+      border-collapse: collapse;
+     }
+
+        .report-card table, .report-card th, .report-card td {
+      border: 1px solid #ccc;
+     }
+
+    .report-card th, .report-card td {
+      padding: 8px;
+      text-align: center;
+    }
+
+    .report-card th {
+      background-color: #f2f2f2;
+    }
+    table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+    </style>
+</head>
+    
+
+<body>
+    <h1>Student Report Card</h1>
+
+    <form >
+        <label for = "Student Name">Student Name</label>
+        <br>
+        <input type=" text" id = "name" required>
+        <br>
+        <label for = "Roll Number">Roll Number</label>
+        <br>
+        <input type=" text" id = "number" required>
+        <br>
+        <label for = "class">Class</label>
+        <br>
+        <input type=" text" id = "class" required>
+        <br>
+        <label for = "School">School</label>
+        <br>
+        <input type=" text" id = "school" required>
+        <br>
+        <label for="Mathmarks">Math Marks</label>
+        <br>
+        <input type="number" id="mathmark" >
+        <br>
+        <label for="sciencemark">Science Marks</label>
+        <br>
+        <input type="number" id="sciencemark" >
+        <br>
+        <label for="englishmark">English Marks</label>
+        <br>
+        <input type="number" id="englishmark" >
+        <br>
+        <label for="historymark">History Marks</label>
+        <br>
+        <input type="number" id="historymark" >
+        <br>
+        <label for="physicaleducationmark">Physical Education Marks</label>
+        <br>
+        <input type="number" id="physicaleducationmark" >
+        <br></br>
+        <button type="button" onclick="GenerateReportCard()"> Generate Report Card</button>
+        <br><br>
+    </form>
+    
+    <div id= "output"></div>
+    <script>
+        function GenerateReportCard(){
+           
+  var name = document.getElementById('name').value;
+  var number = document.getElementById('number').value;
+  var classLevel = document.getElementById('class').value;
+  var schoolName = document.getElementById('school').value;
+  
+  var Maths= parseInt(document.getElementById('mathmark').value);
+  var Science= parseInt(document.getElementById('sciencemark').value);
+  var English= parseInt(document.getElementById('englishmark').value);
+  var History = parseInt(document.getElementById('historymark').value);
+  var PhysicalEducation = parseInt(document.getElementById('physicaleducationmark').value);
+  var table=`
+  <table>
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Marks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Math</td>
+          <td>${Maths}</td>
+
+        </tr>
+        <tr>
+          <td>Science</td>
+          <td>${Science}</td>
+
+        </tr>
+        <tr>
+          <td>English</td>
+          <td>${English}</td>
+
+          
+        </tr>
+        <tr>
+          <td>History</td>
+          <td>${History}</td>
+
+        </tr>
+        <tr>
+          <td>Physical Education</td>
+          <td>${PhysicalEducation}</td>
+
+        </tr>
+      </tbody>
+    </table> `;
+ var average = (Maths + Science + English + History + PhysicalEducation) / 5;
+  
+  var recommendation;
+  
+  if (average >= 90) {
+    recommendation = 'Excellent work! Keep it up!';
+  } else if (average >=75) {
+    recommendation = 'Good job! A bit more effort and you will excel.';
+  } else {
+    recommendation = 'Needs improvement. Work harder!';
+  }
+
+
+  document.getElementById('output').innerHTML =
+    `<h3>Student Name: ${name}</h3>` +
+    `<p><b>Roll Number</b>: ${number}</p>` +
+    `<p><b>Class</b>: ${classLevel}</p>` +
+    `<p><b>School</b>: ${schoolName}</p>` +
+    `<div>${table}</div>`+
+    `<p><b>Average Grade</b>: ${average.toFixed(2)}</p>` +
+    `<p><b>Recommendation</b>: ${recommendation}</p>`;
+        }
+    </script> 
+</body>
+</html>
